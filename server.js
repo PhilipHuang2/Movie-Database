@@ -10,11 +10,18 @@ app.use(express.json());
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'password',
+    password: 'MehmetMusabeyoglu1.',
     database: 'movie_db'
 });
 
-app.post('/api/add-movie');
+app.post('/api/add-movie', (req,res) => {
+    req.body.name 
+    db.query(`INSERT INTO movies(movie_name)
+    VALUES(?)`,req.body.name, (err,result) => {
+        console.log(result);
+    });
+    res.send('Posted');
+});
 app.get('/api/movies');
 app.delete('/api/movie/:id');
 app.get('/api/movie-reviews');
