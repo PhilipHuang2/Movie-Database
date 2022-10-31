@@ -12,8 +12,16 @@ const db = mysql.createConnection({
     user: 'root',
     password: 'password',
     database: 'movie_db'
-})
+});
+
+app.post('/api/add-movie');
+app.get('/api/movies');
+app.delete('/api/movie/:id');
+app.get('/api/movie-reviews');
+app.put('/api/review/:id');
+
+
 
 app.listen(PORT, () => {
     console.log('server running on port localhost:3001');
-}) 
+});
