@@ -10,7 +10,7 @@ app.use(express.json());
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'password',
+    password: 'MehmetMusabeyoglu1.',
     database: 'movie_db'
 });
 
@@ -41,7 +41,12 @@ app.get('/api/movie-reviews', (req, res) => {
         res.send(newList);
     })
 });
-app.put('/api/review/:id');
+app.put('/api/review/:id', (req,res) => {
+    db.query(`UPDATE reviews SET review = ? WHERE id= ? `, [req.body.review, req.params.id], (err,result) => {
+        // console.log(result);
+        res.send("Put request complete");
+    });
+});
 
 
 
