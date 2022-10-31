@@ -10,7 +10,7 @@ app.use(express.json());
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'MehmetMusabeyoglu1.',
+    password: 'password',
     database: 'movie_db'
 });
 
@@ -22,7 +22,12 @@ app.post('/api/add-movie', (req,res) => {
     });
     res.send('Posted');
 });
-app.get('/api/movies');
+app.get('/api/movies', (req,res) => {
+    db.query(`SELECT movie_name from movies`,(err,result) => {
+        let newList = result.map((element)=> element.movie_name)
+        res.send(newList);
+    });
+});
 app.delete('/api/movie/:id');
 app.get('/api/movie-reviews');
 app.put('/api/review/:id');
