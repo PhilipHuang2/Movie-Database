@@ -28,8 +28,19 @@ app.get('/api/movies', (req,res) => {
         res.send(newList);
     });
 });
-app.delete('/api/movie/:id');
-app.get('/api/movie-reviews');
+app.delete('/api/movie/:id', (req, res) => {
+    db.query(`DELETE FROM movies WHERE id = ?`, req.params.id, (err, result) => {
+        console.log(result);
+        res.send('deteled movie');
+    })
+});
+
+app.get('/api/movie-reviews', (req, res) => {
+    db.query(`SELECT review FROM reviews`, (err, result) => {
+        let newList = result.map((element)=> element.review)
+        res.send(newList);
+    })
+});
 app.put('/api/review/:id');
 
 
